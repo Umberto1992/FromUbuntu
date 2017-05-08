@@ -14,7 +14,7 @@ layer_HH = np.load('img00FullHH.npy')
 layer_VV = np.load('img00FullVV.npy')
 layer_HVVH = np.load('img00FullVH+HV.npy')
 
-full_image = np.zeros((2,3,5687,4101)).astype(np.int16)
+full_image = np.zeros((2,3,5687,4101)).astype(np.int32)
 
 full_image[:,0,:,:] = layer_HH
 full_image[:,1,:,:] = layer_HVVH

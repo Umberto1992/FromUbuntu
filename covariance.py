@@ -12,7 +12,7 @@ def covariance(matrix, n_looks):
     l_pixels = n_looks**2
     rows = np.floor(np.size(matrix[0,0,:,0])/n_looks).astype(np.int16)
     columns = np.floor(np.size(matrix[0,0,0,:])/n_looks).astype(np.int16)
-    covmat = np.zeros((3,3,2,rows,columns)).astype(np.int32)
+    covmat = np.zeros((3,3,2,rows,columns)).astype(np.int64)
     
     for i in range(rows):
         
