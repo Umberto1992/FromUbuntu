@@ -11,7 +11,7 @@ import numpy as np
 layer_HV = np.load('img00FullHV.npy')
 layer_VH = np.load('img00FullVH.npy')
 
-final_layer = np.rint((layer_HV+layer_VH)*(1/np.sqrt(2)))
+final_layer = np.rint((layer_HV+layer_VH)/2)
 
 int_layer = final_layer.astype(np.int16)
 
