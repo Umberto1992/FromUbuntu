@@ -13,25 +13,26 @@ def covariance(matrix, n_looks):
     rows = np.floor(np.size(matrix[0,0,:,0])/n_looks).astype(np.int16)
     columns = np.floor(np.size(matrix[0,0,0,:])/n_looks).astype(np.int16)
     covmat = np.zeros((3,3,2,rows,columns)).astype(np.int64)
+    counter = 0
     
     for i in range(rows):
         
         for iii in range(columns):
             
-            for j in range (3):
+            for j in range (n_looks):
                 
-                for jjj in range (3):
+                for jjj in range (n_looks):
             
-                    a1 = matrix[0,0,3*i+j,3*iii+jjj]
-                    a2 = matrix[0,1,i+j,iii+jjj]
-                    a3 = matrix[0,2,i+j,iii+jjj]
-                    b1 = matrix[1,0,i+j,iii+jjj]
-                    b2 = matrix[1,1,i+j,iii+jjj]
-                    b3 = matrix[1,2,i+j,iii+jjj]
+                    a1 = matrix[0,0,n_looks*i+j,n_looks*iii+jjj]
+                    a2 = matrix[0,1,n_looks*i+j,n_looks*iii+jjj]
+                    a3 = matrix[0,2,n_looks*i+j,n_looks*iii+jjj]
+                    b1 = matrix[1,0,n_looks*i+j,n_looks*iii+jjj]
+                    b2 = matrix[1,1,n_looks*i+j,n_looks*iii+jjj]
+                    b3 = matrix[1,2,n_looks*i+j,n_looks*iii+jjj]
                     covmat[0,0,0,i,iii] += (a1**2 + b1**2)/l_pixels
                     covmat[0,0,1,i,iii] += 0
                     covmat[0,1,0,i,iii] += (a1*a2 + b1*b2)/l_pixels
-                    covmat[0,1,1,i,iii] += a2*b1 - a1*b2/l_pixels
+                    covmat[0,1,1,i,iii] += (a2*b1 - a1*b2)/l_pixels
                     covmat[0,2,0,i,iii] += (a1*a3 + b1*b3)/l_pixels 
                     covmat[0,2,1,i,iii] += (a3*b1 - a1*b3)/l_pixels
                     covmat[1,0,0,i,iii] += (a1*a2 + b1*b2)/l_pixels
@@ -48,6 +49,8 @@ def covariance(matrix, n_looks):
                     covmat[2,2,1,i,iii] += 0
             
             
+        print('Iteration number:' + repr(counter))
+        counter += 1
             
     
     return covmat

@@ -7,7 +7,7 @@ Created on Wed May  3 12:10:07 2017
 """
 
 import numpy as np
-import covariance as cov
+import covariance1 as cov
 #import copy
 
 layer_HH = np.load('img00FullHH.npy')
@@ -20,16 +20,12 @@ full_image[:,0,:,:] = layer_HH
 full_image[:,1,:,:] = layer_HVVH
 full_image[:,2,:,:] = layer_VV
 
-L = 3 #multi-look dimension
+L = 7 #multi-look dimension
           
 MatrixC = cov.covariance(full_image,L)
-#full_image_con = copy.copy(full_image)
 
-#full_image_con[1,:,:,:] *= -1
-              
+np.save('img00Cov7by7S', MatrixC)
 
-
-#for i in range(1):
     
     
     
