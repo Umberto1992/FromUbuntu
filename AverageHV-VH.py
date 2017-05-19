@@ -5,6 +5,7 @@ Created on Mon May  1 17:40:15 2017
 
 @author: umberto
 """
+#I use this script to average HV and VH layers and save in a new file
 
 import numpy as np
 

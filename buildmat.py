@@ -6,6 +6,8 @@ Created on Wed May  3 12:10:07 2017
 @author: umberto
 """
 
+#Script to create a single array with 3 layers and call the function to build covariance matrices
+
 import numpy as np
 import covariance1 as cov
 #import copy
