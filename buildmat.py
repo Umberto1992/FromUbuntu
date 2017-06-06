@@ -1,32 +1,39 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
 """
 Created on Wed May  3 12:10:07 2017
 
 @author: umberto
 """
-
-#Script to create a single array with 3 layers and call the function to build covariance matrices
+######################################################
+#
+# This script creates a single array containing 3 layers 
+# and calls the function to build covariance matrices, 
+# the user has to specify which multi-look factor he wants to use
+#
+#######################################################
 
 import numpy as np
-import covariance1 as cov
-#import copy
+import covariance as cov # Import of the function written by myself
 
-layer_HH = np.load('img00FullHH.npy')
-layer_VV = np.load('img00FullVV.npy')
-layer_HVVH = np.load('img00FullVH+HV.npy')
+# Load the signle layers here
+layer_HH = np.load('IceImg02FullHH.npy')
+layer_VV = np.load('IceImg02FullVV.npy')
+layer_HVVH = np.load('IceImg02FullVH+HV.npy')
 
-full_image = np.zeros((2,3,5687,4101)).astype(np.int32)
+rows = np.size(layer_HH[0,:,0]) # N rows of the image
+cols = np.size(layer_HH[0,0,:]) # N columns of the image
+
+full_image = np.zeros((2,3,rows,cols)).astype(np.int32) # This matrix will collect all layers in one array
 
 full_image[:,0,:,:] = layer_HH
 full_image[:,1,:,:] = layer_HVVH
 full_image[:,2,:,:] = layer_VV
 
-L = 7 #multi-look dimension
+L = 7 #multi-look factor
           
 MatrixC = cov.covariance(full_image,L)
 
-np.save('img00Cov7by7S', MatrixC)
+# Save the covariance matrix in a new file
+np.save('IceImg02Cov7by7S', MatrixC)
 
     
     
